@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<style>
+	body {
+		margin: 0; padding: 0;
+		/*height: 1024vh;*/
+		height: 2048vh;
+		background: linear-gradient(to bottom, #0000ff, #333 42%, #000000 44%, #000000 47%, #333 48%, #550c45 50%, #daa520 65%, #fbf2a7);
+		color: white;
+		font-size: 72px;
+		font-family: Times New Roman;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = () => {
+
+	window.scrollTo(0, 0)
+	let currentScroll = 0
+	const body = document.body, html = document.documentElement
+	const documentHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight )
+	const viewportHeight = window.innerHeight
+	const scrollDistance = documentHeight - viewportHeight
+											// [128, 256, 384, 512, 640, 768, 896, 1024]
+	const frictMap = [0, 0.1, 0.3, 0.98, 0.93, 0.3, 0.1, 0]
+
+	const lerp = (a, b, t) => {
+	    return a*(1-t)+b*t
+	}
+
+	const getCurrentScroll = () => {
+		return 512
+	}
+
+	const getFriction = (scrollPosition) => {
+		// const lolProgress = scrollPosition / documentHeight
+		const cellSize = scrollDistance / 8
+		const progress = scrollPosition / cellSize
+		console.log(progress)
+		const a = Math.floor(progress)
+		const interpolate = progress - a
+		const b = (
+			(a !== 7)
+				? a + 1
+				: a
+		)
+		const frictA = frictMap[a] || 0
+		const frictB = frictMap[b] || 0
+		const friction = lerp(frictA, frictB, interpolate)
+		return friction
+	}
+
+	const scrollHandler = (e) => {
+		// get current scroll
+		const { scrollTop } = document.documentElement
+		const friction = getFriction(scrollTop)
+		const amountScrolled = scrollTop - currentScroll
+		const amountScrolledWithFrict = amountScrolled * (1 - friction)
+		const newScrollWithFriction = currentScroll + amountScrolledWithFrict
+		window.scrollTo(0, newScrollWithFriction)
+		currentScroll = newScrollWithFriction
+		// debugger
+		// get current friction
+		// estimate new scroll with friction applied
+		// scroll 
+		// e.preventDefault()
+		// return false
+	}
+	window.addEventListener('scroll', scrollHandler)
+	}
+</script>
+<body>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum nibh felis, feugiat ultrices ligula fringilla ut. Suspendisse potenti. Nam vehicula luctus dolor, non pharetra odio rutrum eget. Aliquam ac convallis arcu. Quisque at erat nec ex maximus efficitur. Aliquam blandit felis ac magna congue, nec volutpat ipsum dictum. In lobortis felis justo, sit amet interdum mauris tristique sit amet. Nulla mauris mauris, iaculis in ligula in, rhoncus consequat nisi. Nunc fringilla euismod euismod. Nulla sapien justo, fringilla et neque quis, ultrices interdum odio. Mauris eu magna nec felis porttitor interdum facilisis pharetra quam. In pharetra augue eu leo tristique, vel vestibulum magna egestas. Quisque commodo leo sed enim vestibulum ornare. Ut varius at leo at porttitor. Maecenas pretium enim urna, non vestibulum lectus eleifend in.</p>
+
+<p>Vestibulum luctus ligula nec eros accumsan egestas. Curabitur nec ligula id felis lacinia placerat. In ornare augue sed luctus iaculis. Morbi ut blandit ipsum. Quisque viverra elit sollicitudin, accumsan augue vitae, laoreet lectus. Donec scelerisque mauris ut condimentum tempor. Aliquam gravida vulputate volutpat. Nulla dapibus vel lacus a ornare. Etiam quis libero a nibh cursus bibendum rutrum a ante. Phasellus fermentum gravida metus id vulputate. Suspendisse mi tellus, semper et ex vel, porttitor hendrerit lorem. Duis luctus nulla vitae pellentesque mattis.</p>
+
+<p>Morbi felis nulla, pulvinar id sem sit amet, faucibus pellentesque lorem. Integer quis rutrum justo, sed placerat enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consequat, arcu et ultricies iaculis, ipsum lacus volutpat massa, pretium luctus urna massa vitae orci. Donec elit quam, vestibulum sit amet nibh sit amet, porta ullamcorper eros. Pellentesque tincidunt feugiat neque, quis varius risus bibendum in. Proin lacinia id turpis non convallis. Suspendisse mattis tellus tincidunt, sollicitudin sem in, ornare leo. Nunc bibendum et justo ut sodales. Donec tellus quam, vestibulum non nulla non, scelerisque cursus lorem. Pellentesque elementum sodales lorem, vitae ornare quam vulputate non. Vivamus bibendum metus vitae ipsum lacinia semper. Pellentesque imperdiet orci at ligula placerat semper. In dapibus, neque non posuere ornare, nisl ex eleifend elit, at posuere sem ante eu ex. Donec tellus felis, pretium eu consectetur at, cursus mattis turpis.</p>
+
+<p>Aliquam rutrum arcu ex. Cras ipsum dolor, rutrum a scelerisque sed, ultricies sit amet eros. Phasellus blandit neque ex, nec pretium velit consequat vel. Curabitur et porta erat, sit amet posuere est. Sed elementum neque et placerat convallis. Morbi congue pharetra imperdiet. Phasellus vel interdum risus, id finibus urna. Proin ultricies ornare dui quis commodo. Fusce elementum sed tellus sed congue. Nullam cursus, dolor non tincidunt rhoncus, nibh mi rutrum orci, sit amet dapibus nisi nunc at nisi. Ut sit amet ipsum tellus. Vivamus lacinia semper eros vel porttitor. Fusce consequat, erat eu tempor blandit, nibh erat posuere leo, iaculis dictum felis enim sed orci.</p>
+
+<p>Donec pulvinar velit a iaculis iaculis. Vivamus id vehicula massa. Quisque sagittis vitae nisl pretium pharetra. Nullam eget felis vel sem mattis molestie sit amet a felis. Donec condimentum blandit tortor ac vehicula. Nulla sed sem in erat sodales sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum nibh felis, feugiat ultrices ligula fringilla ut. Suspendisse potenti. Nam vehicula luctus dolor, non pharetra odio rutrum eget. Aliquam ac convallis arcu. Quisque at erat nec ex maximus efficitur. Aliquam blandit felis ac magna congue, nec volutpat ipsum dictum. In lobortis felis justo, sit amet interdum mauris tristique sit amet. Nulla mauris mauris, iaculis in ligula in, rhoncus consequat nisi. Nunc fringilla euismod euismod. Nulla sapien justo, fringilla et neque quis, ultrices interdum odio. Mauris eu magna nec felis porttitor interdum facilisis pharetra quam. In pharetra augue eu leo tristique, vel vestibulum magna egestas. Quisque commodo leo sed enim vestibulum ornare. Ut varius at leo at porttitor. Maecenas pretium enim urna, non vestibulum lectus eleifend in.</p>
+
+<p>Vestibulum luctus ligula nec eros accumsan egestas. Curabitur nec ligula id felis lacinia placerat. In ornare augue sed luctus iaculis. Morbi ut blandit ipsum. Quisque viverra elit sollicitudin, accumsan augue vitae, laoreet lectus. Donec scelerisque mauris ut condimentum tempor. Aliquam gravida vulputate volutpat. Nulla dapibus vel lacus a ornare. Etiam quis libero a nibh cursus bibendum rutrum a ante. Phasellus fermentum gravida metus id vulputate. Suspendisse mi tellus, semper et ex vel, porttitor hendrerit lorem. Duis luctus nulla vitae pellentesque mattis.</p>
+
+<p>Morbi felis nulla, pulvinar id sem sit amet, faucibus pellentesque lorem. Integer quis rutrum justo, sed placerat enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consequat, arcu et ultricies iaculis, ipsum lacus volutpat massa, pretium luctus urna massa vitae orci. Donec elit quam, vestibulum sit amet nibh sit amet, porta ullamcorper eros. Pellentesque tincidunt feugiat neque, quis varius risus bibendum in. Proin lacinia id turpis non convallis. Suspendisse mattis tellus tincidunt, sollicitudin sem in, ornare leo. Nunc bibendum et justo ut sodales. Donec tellus quam, vestibulum non nulla non, scelerisque cursus lorem. Pellentesque elementum sodales lorem, vitae ornare quam vulputate non. Vivamus bibendum metus vitae ipsum lacinia semper. Pellentesque imperdiet orci at ligula placerat semper. In dapibus, neque non posuere ornare, nisl ex eleifend elit, at posuere sem ante eu ex. Donec tellus felis, pretium eu consectetur at, cursus mattis turpis.</p>
+
+<p>Aliquam rutrum arcu ex. Cras ipsum dolor, rutrum a scelerisque sed, ultricies sit amet eros. Phasellus blandit neque ex, nec pretium velit consequat vel. Curabitur et porta erat, sit amet posuere est. Sed elementum neque et placerat convallis. Morbi congue pharetra imperdiet. Phasellus vel interdum risus, id finibus urna. Proin ultricies ornare dui quis commodo. Fusce elementum sed tellus sed congue. Nullam cursus, dolor non tincidunt rhoncus, nibh mi rutrum orci, sit amet dapibus nisi nunc at nisi. Ut sit amet ipsum tellus. Vivamus lacinia semper eros vel porttitor. Fusce consequat, erat eu tempor blandit, nibh erat posuere leo, iaculis dictum felis enim sed orci.</p>
+
+<p>Donec pulvinar velit a iaculis iaculis. Vivamus id vehicula massa. Quisque sagittis vitae nisl pretium pharetra. Nullam eget felis vel sem mattis molestie sit amet a felis. Donec condimentum blandit tortor ac vehicula. Nulla sed sem in erat sodales sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+</body>
+</html>
