@@ -1,0 +1,22 @@
+{
+  "name": "scroll-friction",
+  "version": "1.0.0",
+  "description": "Increase comprehension by slowing down scroll on important parts of the webpage.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/some1else/scrollfriction.git"
+  },
+  "author": "Srđan Prodanović, Lucijan Kranjc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/some1else/scrollfriction/issues"
+  },
+  "homepage": "https://github.com/some1else/scrollfriction#readme",
+  "dependencies": {
+    "prettier": "^1.16.4"
+  }
+}
